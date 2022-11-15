@@ -1,10 +1,16 @@
-import React from 'react'
+import type { Menu, Shop } from '@shopify/hydrogen/storefront-api-types'
+import { useLocalization, useShopQuery, CacheLong } from '@shopify/hydrogen'
+// import { Suspense } from 'react'
 // import { Header } from '~/components'
-// import { Footer } from '../components/index.server'
+// import {Footer} from '~/components/index.server';
+// import { FooterMenu } from './FooterMenu.client'
+import { parseMenu } from '../../lib/utils'
+import { SHOP_QUERY } from '../../lib/graph-queries/queries'
 
-// import { useLocalization, useShopQuery, CacheLong, gql } from '@shopify/hydrogen'
 
-
+const HEADER_MENU_HANDLE = 'main-menu'
+const FOOTER_MENU_HANDLE = 'footer'
+const SHOP_NAME_FALLBACK = 'Hydrogen'
 
 export const Layout = ({
     children
@@ -12,103 +18,74 @@ export const Layout = ({
     children: React.ReactNode
 }) => {
     return (
-        <div>
-            {/* <HeaderWithMenu /> */}
-            {children}
-            {/* <FooterWithMenu /> */}
+        <div className="min-h-full ">
+
+
+            {/* 
+            <HeaderWithMenu /> */}
+
+            <main>
+                {children}
+            </main>
+            {/* 
+            <FooterMenu /> */}
+
+
         </div>
     )
 }
 
-// const HeaderWithMenu = () => {
+// function HeaderWithMenu() {
 //     const { shopName, headerMenu } = useLayoutQuery()
 //     return <Header title={shopName} menu={headerMenu} />
 // }
 
-// function FooterWithMenu() {
-//     const { footerMenu } = useLayoutQuery()
-//     return <Footer menu={footerMenu} />
-// }
+function useLayoutQuery() {
+    const {
+        language: { isoCode: languageCode },
+    } = useLocalization()
 
-// function useLayoutQuery() {
-//     const {
-//         language: { isoCode: languageCode },
-//     } = useLocalization()
+    const { data } = useShopQuery<{
+        shop: Shop
+        headerMenu: Menu
+        footerMenu: Menu
+    }>({
+        query: SHOP_QUERY,
+        variables: {
+            language: languageCode,
+            headerMenuHandle: HEADER_MENU_HANDLE,
+            footerMenuHandle: FOOTER_MENU_HANDLE,
+        },
+        cache: CacheLong(),
+        preload: '*',
+    })
 
-//     const { data } = useShopQuery<{
-//         shop: Shop
-//         headerMenu: Menu
-//         footerMenu: Menu
-//     }>({
-//         query: SHOP_QUERY,
-//         variables: {
-//             language: languageCode,
-//             headerMenuHandle: HEADER_MENU_HANDLE,
-//             footerMenuHandle: FOOTER_MENU_HANDLE,
-//         },
-//         cache: CacheLong(),
-//         preload: '*',
-//     })
+    const shopName = data ? data.shop.name : SHOP_NAME_FALLBACK
 
-//     return {
-//         shopName: data.shop.name,
-//         headerMenu: data.headerMenu,
-//         footerMenu: data.footerMenu,
-//     }
-// }
+    /*
+      Modify specific links/routes (optional)
+      @see: https://shopify.dev/api/storefront/unstable/enums/MenuItemType
+      e.g here we map:
+        - /blogs/news -> /news
+        - /blog/news/blog-post -> /news/blog-post
+        - /collections/all -> /products
+    */
+    const customPrefixes = { BLOG: '', CATALOG: 'products' }
 
-// const SHOP_QUERY = gql`
-//     query ShopQuery(
-//         $language: String!
-//         $headerMenuHandle: String!
-//         $footerMenuHandle: String!
-//     ) {
-//         shop {
-//             name
-//         }
-//         headerMenu: menuByHandle(handle: $headerMenuHandle) {
-//             ...Menu
-//         }
-//         footerMenu: menuByHandle(handle: $footerMenuHandle) {
-//             ...Menu
-//         }
-//     }
+    const headerMenu = data?.headerMenu
+        ? parseMenu(data.headerMenu, customPrefixes)
+        : undefined
 
-//     fragment Menu on Menu {
-//         id
-//         handle
-//         label: title
-//         items {
-//             id
-//             label: title
-//             url
-//             type
-//             linkedResource {
-//                 ... on Page {
-//                     id
-//                     handle
-//                     title
+    console.log("menu", headerMenu)
+
+    const footerMenu = data?.footerMenu
+        ? parseMenu(data.footerMenu, customPrefixes)
+        : undefined
+
+    return { footerMenu, headerMenu, shopName }
+}
 
 
-//                     url: translatedUrl(language: $language) 
-//                 }
-//                 ... on Product {
-//                     id
-//                     handle
-//                     title
-//                     url: translatedUrl(language: $language)
-//                 }
-//                 ... on Collection {
-//                     id
-//                     handle
-//                     title
-//                     url: translatedUrl(language: $language)
-//                 }
-//             }
-//         }
-
-//     }
-// `
 
 
 

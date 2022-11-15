@@ -1,0 +1,10 @@
+// vite.config.ts
+import { defineConfig } from "vite";
+import hydrogen from "@shopify/hydrogen/plugin";
+var vite_config_default = defineConfig({
+  plugins: [hydrogen()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImltcG9ydCB7ZGVmaW5lQ29uZmlnfSBmcm9tICd2aXRlJztcbmltcG9ydCBoeWRyb2dlbiBmcm9tICdAc2hvcGlmeS9oeWRyb2dlbi9wbHVnaW4nO1xuXG5leHBvcnQgZGVmYXVsdCBkZWZpbmVDb25maWcoe1xuICBwbHVnaW5zOiBbaHlkcm9nZW4oKV0sXG59KTtcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBQSxTQUFRLG9CQUFtQjtBQUMzQixPQUFPLGNBQWM7QUFFckIsSUFBTyxzQkFBUSxhQUFhO0FBQUEsRUFDMUIsU0FBUyxDQUFDLFNBQVMsQ0FBQztBQUN0QixDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=
