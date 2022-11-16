@@ -22,5 +22,49 @@
     }
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"],
+
+  //tailwind config
+
+  "plugins": [
+    {
+      "name": "tailwindcss",
+      "options": {
+        "config": "./tailwind.config.js"
+      }
+    },
+    {
+      "name": "postcss-nested"
+    }
+  ],
+
+  //postcss config
+
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+
+  //tailwindINtellisense
+
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "typescript": "ts",
+    "typescriptreact": "tsx"
+  }
+
+  //vite config
+
+  // "vite": {
+  //   "plugins": [
+  //     {
+  //       "name": "vite-plugin-windicss",
+  //       "options": {
+  //         "config": "./windi.config.ts"
+  //       }
+  //     }
+  //   ]
+  // }
 }

@@ -1,7 +1,7 @@
-// export * from './Icon';
+export * from './Icon'
 // export {Button} from './Button';
 // export {Grid} from './Grid';
-export { Heading } from './Heading';
+export { Heading } from './Heading'
 // export {Input} from './Input';
 // export {LogoutButton} from './LogoutButton.client';
 // export {Section} from './Section';
