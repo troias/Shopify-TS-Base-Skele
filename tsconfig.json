@@ -51,20 +51,6 @@
 
   "tailwindCSS.includeLanguages": {
     "plaintext": "html",
-    "typescript": "ts",
-    "typescriptreact": "tsx"
+    "typescriptReact": "typescriptreact"
   }
-
-  //vite config
-
-  // "vite": {
-  //   "plugins": [
-  //     {
-  //       "name": "vite-plugin-windicss",
-  //       "options": {
-  //         "config": "./windi.config.ts"
-  //       }
-  //     }
-  //   ]
-  // }
 }

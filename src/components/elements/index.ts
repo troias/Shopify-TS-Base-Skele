@@ -6,4 +6,4 @@ export { Heading } from './Heading'
 // export {LogoutButton} from './LogoutButton.client';
 // export {Section} from './Section';
 // export {Skeleton} from './Skeleton';
-// export {Text} from './Text';
+export { Text } from './Text'

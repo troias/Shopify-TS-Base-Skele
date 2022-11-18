@@ -1,7 +1,2 @@
-export const sectionsLint = () => {
-    //
-}
 
-export const sections = () => {
-    //
-}
+export { Hero } from './Hero'

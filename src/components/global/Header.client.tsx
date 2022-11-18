@@ -1,6 +1,5 @@
-import { Link, useUrl, useCart } from '@shopify/hydrogen'
-import { useWindowScroll } from 'react-use'
-
+import { Link, useUrl, useCart } from "@shopify/hydrogen"
+import { useWindowScroll } from "react-use"
 
 import {
     Heading,
@@ -9,32 +8,23 @@ import {
     IconMenu,
     IconSearch,
     // Input,
-} from '~/components'
+} from "~/components"
 
-import type { EnhancedMenu } from '~/lib/utils'
-import { useDrawer } from './Drawer.client'
-
-
-
-
-
+import type { EnhancedMenu } from "~/lib/utils"
+import { useDrawer } from "./Drawer.client"
 
 export const Header = ({
-    title = '',
+    title = "",
     menu = [],
 }: {
     title: string
     menu?: EnhancedMenu
-}
-
-) => {
-
+}) => {
     const { pathname } = useUrl()
     const localeMatch = /^\/([a-z]{2})(\/|$)/i.exec(pathname)
     const countryCode = localeMatch ? localeMatch[1] : undefined
 
-
-    const isHome = pathname === `/${countryCode ? countryCode + '/' : ''}`
+    const isHome = pathname === `/${countryCode ? countryCode + "/" : ""}`
 
     // console.log("isHome", isHome)
     // console.log("pathName", pathname)
@@ -51,7 +41,6 @@ export const Header = ({
         closeDrawer: closeMenu,
     } = useDrawer()
 
-
     return (
         <>
             <MobileHeader
@@ -62,8 +51,6 @@ export const Header = ({
                 openMenu={openMenu}
             />
 
-
-
             <DesktopHeader
                 countryCode={countryCode}
                 isHome={isHome}
@@ -72,12 +59,8 @@ export const Header = ({
                 openCart={openCart}
             />
         </>
-
-
     )
 }
-
-
 
 function MobileHeader({
     countryCode,
@@ -95,22 +78,22 @@ function MobileHeader({
     const { y } = useWindowScroll()
 
     const styles = {
-        button: 'relative flex items-center justify-center w-8 h-8',
-        container: `${isHome
-            ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-            : 'bg-contrast/80 text-primary'
-            } ${y > 50 && !isHome ? 'shadow-lightHeader ' : ''
-            }flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`,
+        button: "relative flex items-center justify-center w-8 h-8",
+        container: ` border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6  ${isHome
+            ? "bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader"
+            : "bg-contrast/80 text-primary"
+            } ${y > 50 && !isHome ? "shadow-lightHeader " : ""
+            }flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8 `,
     }
 
     return (
         <header role="banner" className={styles.container}>
-            <div className="flex items-center justify-start w-full gap-4">
+            <div className="flex items-center justify-start w-full gap-4 ">
                 <button onClick={openMenu} className={styles.button}>
                     <IconMenu />
                 </button>
                 <form
-                    action={`/${countryCode ? countryCode + '/' : ''}search`}
+                    action={`/${countryCode ? countryCode + "/" : ""}search`}
                     className="items-center gap-2 sm:flex"
                 >
                     <button type="submit" className={styles.button}>
@@ -134,13 +117,13 @@ function MobileHeader({
                 className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
                 to="/"
             >
-                <Heading className="font-bold text-center" as={isHome ? 'h1' : 'h2'}>
+                <Heading className="font-bold text-center" as={isHome ? "h1" : "h2"}>
                     {title}
                 </Heading>
             </Link>
 
             <div className="flex items-center justify-end w-full gap-4">
-                <Link to={'/account'} className={styles.button}>
+                <Link to={"/account"} className={styles.button}>
                     <IconAccount />
                 </Link>
                 <button onClick={openCart} className={styles.button}>
@@ -151,7 +134,6 @@ function MobileHeader({
         </header>
     )
 }
-
 
 function DesktopHeader({
     countryCode,
@@ -170,41 +152,48 @@ function DesktopHeader({
 
     const styles = {
         button:
-            'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
+            "relative flex items-center justify-center w-8 h-8 focus:ring-primary/5",
+        top_container: `${isHome &&
+            "hidden lg:flex justify-start px-4 py-2 min-w-full border-b-[1px] border-grey    "
+            }`,
         container: `${isHome
-            ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-            : 'bg-contrast/80 text-primary'
-            } ${y > 50 && !isHome ? 'shadow-lightHeader ' : ''
-            }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-4`,
+            ? "bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader"
+            : "bg-contrast/80 text-primary"
+            } ${y > 50 && !isHome ? "shadow-lightHeader " : ""
+            }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 
+            justify-between w-full leading-none gap-8 px-4 py-4`,
+        text_secondary: " font-semibold  text-xs  text-secondary-grey ",
+        border_container: " md:flex-col lg:border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6 "
     }
 
     return (
-        <header className=' '  >
-
-            <div role="banner" className="flex-col border-b-2 border-r-2 border-l-2 " >
-                <div className='hidden lg:flex justify-center px-12 py-4 min-w-full border-b-[1px] border-grey    '>
-                    upper section treate
+        <header className="pb-8 ">
+            <div
+                role="banner"
+                className={styles.border_container}
+            >
+                <div className={styles.top_container}>
+                    <span className={styles.text_secondary}>
+                        Men's 20-80% off "last chance" sale
+                    </span>
                 </div>
                 <div className={styles.container}>
-
-
                     <div className="flex gap-12 ">
-                        <Link className={`font-bold`} to="/">
+                        <Link className={` font-extrabold text-lg uppercase `} to="/">
                             {title}
                         </Link>
-
                     </div>
-                    <nav className="flex gap-8">
+                    <nav className="flex gap-4">
                         {/* Top level menu items */}
                         {(menu?.items || []).map((item) => (
-                            <Link key={item.id} to={item.to} target={item.target}>
+                            <Link key={item.id} to={item.to} target={item.target} className={` text-secondary-grey uppercase text-sm font-bold `}>
                                 {item.title}
                             </Link>
                         ))}
                     </nav>
                     <div className="flex items-center gap-1">
                         <form
-                            action={`/${countryCode ? countryCode + '/' : ''}search`}
+                            action={`/${countryCode ? countryCode + "/" : ""}search`}
                             className="flex items-center gap-2"
                         >
                             {/* <Input
@@ -222,7 +211,7 @@ function DesktopHeader({
                                 <IconSearch />
                             </button>
                         </form>
-                        <Link to={'/account'} className={styles.button}>
+                        <Link to={"/account"} className={styles.button}>
                             <IconAccount />
                         </Link>
                         <button onClick={openCart} className={styles.button}>
@@ -232,8 +221,7 @@ function DesktopHeader({
                     </div>
                 </div>
             </div>
-
-        </header >
+        </header>
     )
 }
 
@@ -249,8 +237,8 @@ function CartBadge({ dark }: { dark: boolean }) {
     return (
         <div
             className={`${dark
-                ? 'text-primary bg-contrast dark:text-contrast dark:bg-primary'
-                : 'text-contrast bg-primary'
+                ? "text-primary bg-contrast dark:text-contrast dark:bg-primary"
+                : "text-contrast bg-primary"
                 } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
         >
             <span>{totalQuantity}</span>

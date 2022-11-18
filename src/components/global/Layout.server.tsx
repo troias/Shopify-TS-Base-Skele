@@ -18,9 +18,7 @@ export const Layout = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="min-h-full lg:px-6 ">
-
-
+        <div className="min-h-full px-2 lg:px-20 xl:px-60 ">
 
             <HeaderWithMenu />
 
@@ -38,7 +36,7 @@ export const Layout = ({
 function HeaderWithMenu() {
     const { shopName, headerMenu } = useLayoutQuery()
 
-    console.log("headerMenu", headerMenu, "shopName", shopName)
+    // console.log("headerMenu", headerMenu, "shopName", shopName)
 
     return <Header title={shopName} menu={headerMenu} />
 }
