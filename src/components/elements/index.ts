@@ -4,6 +4,6 @@ export * from './Icon'
 export { Heading } from './Heading'
 // export {Input} from './Input';
 // export {LogoutButton} from './LogoutButton.client';
-// export {Section} from './Section';
+export { Section } from './Section'
 // export {Skeleton} from './Skeleton';
 export { Text } from './Text'

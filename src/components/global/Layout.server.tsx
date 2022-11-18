@@ -2,8 +2,8 @@ import type { Menu, Shop } from '@shopify/hydrogen/storefront-api-types'
 import { useLocalization, useShopQuery, CacheLong } from '@shopify/hydrogen'
 // import { Suspense } from 'react'
 import { Header } from '~/components'
-// import {Footer} from '~/components/index.server';
-// import { FooterMenu } from './FooterMenu.client'
+import { Footer } from '~/components/index.server'
+
 import { parseMenu } from '~/lib/utils'
 import { SHOP_QUERY } from '../../lib/graph-queries/queries'
 
@@ -25,8 +25,8 @@ export const Layout = ({
             <main>
                 {children}
             </main>
-            {/* 
-            <FooterMenu /> */}
+
+            <FooterWithMenu />
 
 
         </div>
@@ -39,6 +39,11 @@ function HeaderWithMenu() {
     // console.log("headerMenu", headerMenu, "shopName", shopName)
 
     return <Header title={shopName} menu={headerMenu} />
+}
+
+function FooterWithMenu() {
+    const { footerMenu } = useLayoutQuery()
+    return <Footer />
 }
 
 function useLayoutQuery() {
