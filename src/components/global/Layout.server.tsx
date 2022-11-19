@@ -43,7 +43,7 @@ function HeaderWithMenu() {
 
 function FooterWithMenu() {
     const { footerMenu } = useLayoutQuery()
-    return <Footer />
+    return <Footer menu={footerMenu} />
 }
 
 function useLayoutQuery() {
