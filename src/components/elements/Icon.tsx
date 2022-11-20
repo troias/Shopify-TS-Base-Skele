@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-type IconProps = JSX.IntrinsicElements['svg'] & {
+export type IconProps = JSX.IntrinsicElements['svg'] & {
   direction?: 'up' | 'right' | 'down' | 'left'
 }
 
@@ -14,6 +14,8 @@ function Icon({
   width = '6',
   height = '6',
   viewBox = '0 0 20 20',
+
+
   ...props
 
 }: IconProps) {
@@ -232,13 +234,90 @@ export function IconRemove(props: IconProps) {
 export function InstagramIcon(props: IconProps) {
   return (
 
-    <Icon {...props} viewBox={`0 0 20 24`}  >
+    <Icon {...props} viewBox="0 0 50 50" width="16px" height="16px" >
       <title>Instagram</title>
 
-
-
-      <path d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z" />
+      <path d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z" />
 
     </Icon>
+  )
+}
+
+export function FacebookIcon(props: IconProps) {
+  return (
+
+    <Icon {...props} viewBox={`0 0 30 30`}  >
+      <title>Facebook</title>
+
+    </Icon>
+  )
+}
+
+export function TwitterIcon(props: IconProps) {
+  return (
+
+    <Icon {...props} viewBox={`0 0 20 24`}  >
+      <title>Twitter</title>
+
+    </Icon>
+  )
+}
+
+export function YoutubeIcon(props: IconProps) {
+  return (
+
+    <Icon {...props} viewBox={`0 0 30 30`}  >
+      <title>Youtube</title>
+
+    </Icon>
+  )
+}
+
+export function TickTockIcon(props: IconProps) {
+  return (
+
+    <Icon {...props} viewBox={"0 0 30 30"} width="16px" height="16px" >
+      height="24px" >
+      <title>Tick Tock</title>
+      <path d="M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.104,4,24,4z M22.689,13.474 c-0.13,0.012-0.261,0.02-0.393,0.02c-1.495,0-2.809-0.768-3.574-1.931c0,3.049,0,6.519,0,6.577c0,2.685-2.177,4.861-4.861,4.861 C11.177,23,9,20.823,9,18.139c0-2.685,2.177-4.861,4.861-4.861c0.102,0,0.201,0.009,0.3,0.015v2.396c-0.1-0.012-0.197-0.03-0.3-0.03 c-1.37,0-2.481,1.111-2.481,2.481s1.11,2.481,2.481,2.481c1.371,0,2.581-1.08,2.581-2.45c0-0.055,0.024-11.17,0.024-11.17h2.289 c0.215,2.047,1.868,3.663,3.934,3.811V13.474z" />
+    </Icon >
+  )
+}
+
+export const MoonSVGIcon = (props: IconProps) => {
+
+
+
+
+
+
+
+  return (
+    <>
+
+    </>
+  )
+}
+
+export const SunSVGIcon = ({
+
+}) => {
+  return (
+    <svg
+
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 3a9 9 0 100 18 9 9 0 000-18z"
+      />
+    </svg>
   )
 }

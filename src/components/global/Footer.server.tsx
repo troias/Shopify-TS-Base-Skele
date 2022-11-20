@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
+
 import { useUrl } from '@shopify/hydrogen'
 
 import { Section, Heading, FooterMenu, CountrySelector } from '~/components'
 import type { EnhancedMenu } from '~/lib/utils'
-import { InstagramIcon } from '~/components'
+import { InstagramIcon, TickTockIcon, DarkModeSliderButton } from '~/components'
 
 /**
  * A server component that specifies the content of the footer on the website
@@ -26,8 +28,8 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
 
     return (
-        <div className="grid grid-cols-1 grid-rows-2">
-            <div className="grid grid-cols-1 sm:grid-cols-2 ">
+        <div className="grid grid-cols-1 grid-rows-2 ">
+            <div className="grid grid-cols-1  ">
 
 
                 {/* news letter section */}
@@ -56,14 +58,18 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
                             </button>
 
                         </div>
-                        <div className="grid grid-cols-6 w-2/3" >
-                            <div><InstagramIcon /></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
+                        <div className="w-full">
 
+
+                            <div className="grid grid-cols-6 w-full gap-2 place-items-center" >
+                                <InstagramIcon />
+                                <TickTockIcon />
+                                <TickTockIcon />
+                                <TickTockIcon />
+                                <TickTockIcon />
+                                <DarkModeSliderButton />
+
+                            </div>
                         </div>
                     </div>
 
@@ -117,6 +123,12 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
     )
 }
+
+
+
+
+
+
 
 
 

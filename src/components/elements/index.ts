@@ -7,3 +7,4 @@ export { Heading } from './Heading'
 export { Section } from './Section'
 // export {Skeleton} from './Skeleton';
 export { Text } from './Text'
+export { DarkModeSliderButton } from './DarkModeSliderButton.client'
