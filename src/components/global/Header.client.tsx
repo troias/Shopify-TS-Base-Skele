@@ -1,6 +1,7 @@
 import { Link, useUrl, useCart } from "@shopify/hydrogen"
 import { useWindowScroll } from "react-use"
 
+
 import {
     Heading,
     IconAccount,
@@ -77,13 +78,20 @@ function MobileHeader({
 }) {
     const { y } = useWindowScroll()
 
+
     const styles = {
         button: "relative flex items-center justify-center w-8 h-8",
-        container: ` border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6  ${isHome
-            ? "bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader"
-            : "bg-contrast/80 text-primary"
-            } ${y > 50 && !isHome ? "shadow-lightHeader " : ""
-            }flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8 `,
+        container: ` border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6 
+             ${isHome
+                ? "bg-white/80  dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader"
+                : "bg-contrast/80 text-primary"
+            } 
+            
+            ${y > 50 && !isHome ? "shadow-lightHeader " : "bg-white/80"
+            }
+            ${y > 50 && "bg-white/80"}
+            
+            flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8  `,
     }
 
     return (
@@ -99,17 +107,7 @@ function MobileHeader({
                     <button type="submit" className={styles.button}>
                         <IconSearch />
                     </button>
-                    {/* <Input
-              className={
-                isHome
-                  ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                  : 'focus:border-primary/20'
-              }
-              type="search"
-              variant="minisearch"
-              placeholder="Search"
-              name="q"
-            /> */}
+
                 </form>
             </div>
 
@@ -117,7 +115,7 @@ function MobileHeader({
                 className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
                 to="/"
             >
-                <Heading className="font-bold text-center" as={isHome ? "h1" : "h2"}>
+                <Heading className="font-bold text-center uppercase " as={isHome ? "h1" : "h2"}>
                     {title}
                 </Heading>
             </Link>
@@ -158,16 +156,22 @@ function DesktopHeader({
             }`,
         container: `${isHome
             ? "bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader"
-            : "bg-contrast/80 text-primary"
-            } ${y > 50 && !isHome ? "shadow-lightHeader " : ""
-            }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 
-            justify-between w-full leading-none gap-8 px-4 py-4`,
+            : "bg-contrast/80 text-primary"} 
+            
+            ${y > 50 && !isHome
+                ? "shadow-lightHeader "
+                : ""
+            }
+            
+            hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 
+            justify-between w-full leading-none gap-8 px-4 py-2 border-s`,
+
         text_secondary: " font-semibold  text-xs  text-secondary-grey ",
         border_container: " md:flex-col lg:border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6 "
     }
 
     return (
-        <header className="pb-8 ">
+        <header className="pb-8 drop-shadow-lg  ">
             <div
                 role="banner"
                 className={styles.border_container}
@@ -196,17 +200,7 @@ function DesktopHeader({
                             action={`/${countryCode ? countryCode + "/" : ""}search`}
                             className="flex items-center gap-2"
                         >
-                            {/* <Input
-              className={
-                isHome
-                  ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                  : 'focus:border-primary/20'
-              }
-              type="search"
-              variant="minisearch"
-              placeholder="Search"
-              name="q"
-            /> */}
+
                             <button type="submit" className={styles.button}>
                                 <IconSearch />
                             </button>

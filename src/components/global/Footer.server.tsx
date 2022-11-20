@@ -2,6 +2,7 @@ import { useUrl } from '@shopify/hydrogen'
 
 import { Section, Heading, FooterMenu, CountrySelector } from '~/components'
 import type { EnhancedMenu } from '~/lib/utils'
+import { InstagramIcon } from '~/components'
 
 /**
  * A server component that specifies the content of the footer on the website
@@ -53,6 +54,15 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
                             >
                                 Sign up
                             </button>
+
+                        </div>
+                        <div className="grid grid-cols-6 w-2/3" >
+                            <div><InstagramIcon /></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
 
                         </div>
                     </div>

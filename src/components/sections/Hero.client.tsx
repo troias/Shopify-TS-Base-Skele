@@ -2,6 +2,7 @@ import { Image, Link, Video } from '@shopify/hydrogen'
 import type { Media } from '@shopify/hydrogen/storefront-api-types'
 
 import { Heading, Text } from '~/components'
+import { useWindowSize } from 'react-use'
 
 interface Metafield {
   value: string
@@ -31,8 +32,10 @@ export function Hero({
   top?: boolean
 }) {
 
-  console.log("top", top)
+
   // console.log("hero", "-", "inline", byline, cta, handle, heading, height, loading, spread, spreadSecondary, top)
+  const { width } = useWindowSize()
+  console.log("width", width)
 
   return (
     <Link to={`/collections/${handle}`}>
@@ -66,18 +69,19 @@ export function Hero({
           )}
 
         </div>
-        <div className="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast">
+        <div className="flex flex-col items-baseline justify-between gap-4 px-2 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast">
 
           {
             heading?.value && (
-              <Heading width='wide' className="text-4xl font-bold text-white uppercase font-black">
+              <Heading width='wide' className="text-2xl md:text-4xl font-bold text-white uppercase ">
                 {/* split heading to tow lines */}
-                {heading.value.split(' ').map((word, index) => {
+                {width > 600 && heading.value.split(' ').map((word, index) => {
                   if (index === 0) {
                     return <span key={index}>{word}</span>
                   }
                   return <span key={index} className="block">{word}</span>
                 })}
+                {width <= 600 && heading.value}
 
               </Heading>
             )
@@ -86,38 +90,25 @@ export function Hero({
           {
             byline?.value && (
 
-              <Text className="text-lg font-bold text-white  font-semibold">
+              <Text className={`  text-base font-bold text-white  font-semibold ${width < 600 && "hidden"}`}>
                 {byline.value}
               </Text>
             )
           }
           <Link to={`/collections/${handle}`} className="mb-2">
-            <Text className="text-2xl font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
+            <Text className="text-lg font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
               Shop Womens <br />
             </Text>
           </Link>
           <Link to={`/collections/${handle}`}>
-            <Text className="text-2xl font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
+            <Text className="text-lg font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
               Shop Mens <br />
             </Text>
           </Link>
 
 
 
-          {/* {heading?.value && (
-            <Heading format as="h2" size="display" className="max-w-md">
-              {heading.value}
-            </Heading>
-          )}
-          {cta?.value && <Text size="lead">{cta.value}</Text>}
-          {byline?.value && (
-            <div className="bg-gray-400 rounded-3xl">
 
-              <Text format width="narrow" as="p" size="lead">
-                {byline.value}
-              </Text>
-            </div>
-          )} */}
         </div>
       </section>
     </Link>
