@@ -44,11 +44,11 @@ export function Hero({
           } ${height === 'full'
             ? 'h-screen'
             : 'aspect-[4/5] sm:aspect-square md:aspect-[2/1] lg:aspect-[2/1] xl:aspect-[2/1]'
-          }  overflow-hidden px-10  `}
+          }  overflow-hidden px-10 z-30  dark:border-2 dark:border-gray-400 `}
       >
-        <div className="absolute inset-0 grid flex-grow grid-flow-col pointer-events-none auto-cols-fr -z-10 content-stretch overflow-clip  ">
+        <div className="absolute inset-0 grid flex-grow grid-flow-col pointer-events-none auto-cols-fr -z-10 content-stretch overflow-clip   ">
           {spread?.reference && (
-            <div className="">
+            <div className="  ">
               <SpreadMedia
                 scale={2}
                 sizes={
@@ -64,6 +64,7 @@ export function Hero({
                 width={spreadSecondary?.reference ? 375 : 750}
                 data={spread.reference as Media}
                 loading={loading}
+
               />
             </div>
           )}
@@ -154,7 +155,7 @@ function SpreadMedia({
         widths={widths}
         sizes={sizes}
         alt={data.alt || 'Marketing Banner Image'}
-        className="block object-cover w-full h-full"
+        className="block object-cover w-full h-full "
         // @ts-ignore
         data={data.image}
         loading={loading}

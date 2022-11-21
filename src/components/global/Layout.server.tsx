@@ -11,6 +11,7 @@ import { SHOP_QUERY } from '../../lib/graph-queries/queries'
 const HEADER_MENU_HANDLE = 'main-menu'
 const FOOTER_MENU_HANDLE = 'footer'
 const SHOP_NAME_FALLBACK = 'Hydrogen'
+const INFO_MENU_HANDLE = 'info'
 
 export const Layout = ({
     children
@@ -18,7 +19,7 @@ export const Layout = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="min-h-full px-2 lg:px-20 xl:px-60 ">
+        <div className="min-h-full px-2 lg:px-20 xl:px-60 dark:bg-dm-grey z-0">
 
             <HeaderWithMenu />
 
@@ -55,16 +56,21 @@ function useLayoutQuery() {
         shop: Shop
         headerMenu: Menu
         footerMenu: Menu
+        infoMenu: Menu
+
     }>({
         query: SHOP_QUERY,
         variables: {
             language: languageCode,
             headerMenuHandle: HEADER_MENU_HANDLE,
             footerMenuHandle: FOOTER_MENU_HANDLE,
+            infoMenuHandle: INFO_MENU_HANDLE,
         },
         cache: CacheLong(),
         preload: '*',
     })
+
+    console.log("returned data", data)
 
     const shopName = data ? data.shop.name : SHOP_NAME_FALLBACK
 

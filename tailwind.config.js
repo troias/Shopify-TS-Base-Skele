@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         "secondary-grey": "#4D4D4D",
         "menu-grey": "#666666",
+        "dm-grey": "#191919",
       },
     },
     plugins: [

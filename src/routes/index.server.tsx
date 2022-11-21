@@ -75,7 +75,7 @@ const HomePageContent = () => {
     heroBanners.nodes,
   ) as PrimaryHeroBanner[]
 
-  console.log("herodata", data.heroBanners.nodes)
+  // console.log("herodata", data.heroBanners.nodes)
 
   return (
     <div>

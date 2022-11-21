@@ -189,6 +189,10 @@ export interface EnhancedMenuItem extends MenuItem {
 
 export interface EnhancedMenu extends Menu {
     items: EnhancedMenuItem[]
+
+
+
+
 }
 
 /*

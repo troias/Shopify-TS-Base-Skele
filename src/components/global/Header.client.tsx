@@ -91,12 +91,13 @@ function MobileHeader({
             }
             ${y > 50 && "bg-white/80"}
             
-            flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8  `,
+            flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8 
+            dark:bg-black/80 dark:text-white dark:border-grey-400 dark:backdrop-blur-none dark:shadow-none dark:border-gray-400 `,
     }
 
     return (
         <header role="banner" className={styles.container}>
-            <div className="flex items-center justify-start w-full gap-4 ">
+            <div className="flex items-center justify-start w-full gap-4  ">
                 <button onClick={openMenu} className={styles.button}>
                     <IconMenu />
                 </button>
