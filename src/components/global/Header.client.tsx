@@ -165,10 +165,10 @@ function DesktopHeader({
             }
             
             hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 
-            justify-between w-full leading-none gap-8 px-4 py-2 border-s`,
+            justify-between w-full leading-none gap-8 px-4 py-2 border-s dark:bg-black`,
 
-        text_secondary: " font-semibold  text-xs  text-secondary-grey ",
-        border_container: " md:flex-col lg:border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6 "
+        text_secondary: " font-semibold  text-xs  text-secondary-grey dark:text-white ",
+        border_container: " md:flex-col lg:border-b-2  border-r-2 border-l-2  rounded-b-3xl px-6 dark:text-white "
     }
 
     return (
@@ -184,14 +184,14 @@ function DesktopHeader({
                 </div>
                 <div className={styles.container}>
                     <div className="flex gap-12 ">
-                        <Link className={` font-extrabold text-lg uppercase `} to="/">
+                        <Link className={` font-extrabold text-lg uppercase dark:text-white`} to="/">
                             {title}
                         </Link>
                     </div>
                     <nav className="flex gap-4">
                         {/* Top level menu items */}
                         {(menu?.items || []).map((item) => (
-                            <Link key={item.id} to={item.to} target={item.target} className={` text-secondary-grey uppercase text-sm font-bold `}>
+                            <Link key={item.id} to={item.to} target={item.target} className={` dark:text-white text-secondary-grey uppercase text-sm font-bold `}>
                                 {item.title}
                             </Link>
                         ))}

@@ -43,8 +43,22 @@ function HeaderWithMenu() {
 }
 
 function FooterWithMenu() {
-    const { footerMenu } = useLayoutQuery()
-    return <Footer menu={footerMenu} />
+
+
+    const ctx = useLayoutQuery()
+
+    const footerArr = [{
+        ...ctx.footerMenu,
+        handeName: FOOTER_MENU_HANDLE
+    }, {
+        ...ctx.infoMenu,
+        handeName: INFO_MENU_HANDLE
+    }]
+
+    // console.log("returned data", footerArr)
+
+
+    return <Footer menu={footerArr} />
 }
 
 function useLayoutQuery() {
@@ -70,7 +84,7 @@ function useLayoutQuery() {
         preload: '*',
     })
 
-    console.log("returned data", data)
+
 
     const shopName = data ? data.shop.name : SHOP_NAME_FALLBACK
 
@@ -87,7 +101,14 @@ function useLayoutQuery() {
         ? parseMenu(data.footerMenu, customPrefixes)
         : undefined
 
-    return { footerMenu, headerMenu, shopName }
+    const infoMenu = data?.infoMenu
+        ? parseMenu(data.infoMenu, customPrefixes)
+        : undefined
+
+
+
+
+    return { footerMenu, headerMenu, shopName, infoMenu }
 }
 
 

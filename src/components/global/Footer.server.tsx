@@ -12,7 +12,7 @@ import type { EnhancedMenu } from '~/lib/utils'
  */
 export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
-    // console.log("footer menu", menu)
+    console.log("Footer Footer", menu)
 
     const { pathname } = useUrl()
 
@@ -29,6 +29,9 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
 
 
+
+    // console.log("footer menu", menuInArr)
+
     return (
         <div className="grid grid-cols-1 grid-rows-2 ">
             <div className="grid grid-cols-1  ">
@@ -44,6 +47,7 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
 
                 </div>
+
                 <FooterLinks menu={menu} />
 
 
