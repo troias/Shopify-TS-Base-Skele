@@ -5,18 +5,47 @@ import { FooterMenu } from '../global/FooterMenu.client'
 import type { EnhancedMenu, EnhancedMenuItem } from '~/lib/utils'
 
 
-
-export const FooterLinks = ({ menu }: { menu?: EnhancedMenu }) => {
-
-
-
+type RevisedFooterMenun = {
+    handeName: String,
+    items: EnhancedMenuItem[]
 
 
+}[]
 
-    const footerMenu = menu?.map((item: EnhancedMenuItem) => {
 
-        // // const { title, url, children } = item
+export const FooterLinks = ({ menu }: {
+    menu?: RevisedFooterMenun,
+    defaultFooterMenu?: EnhancedMenu
+}) => {
+
+
+
+
+    const removeDefaultFooterIfCustomFootersExist = (menu) => {
+
+        if (menu.length > 1) {
+            return menu.filter((item) => item.handeName !== "footer")
+        }
+        return menu
+
+
+    }
+
+    const updatedMenu = removeDefaultFooterIfCustomFootersExist(menu)
+
+
+
+
+
+
+
+    const footerMenu = updatedMenu?.map((item) => {
+
+        // // const { title, url, children } = item             
         // console.log("FooterLinksmenu", item)
+
+
+
 
         return (
 
@@ -27,6 +56,7 @@ export const FooterLinks = ({ menu }: { menu?: EnhancedMenu }) => {
                     {item?.handeName}
                 </Heading>
                 {item.items.map((item) => {
+
 
                     return (
                         <div className="">
@@ -42,6 +72,8 @@ export const FooterLinks = ({ menu }: { menu?: EnhancedMenu }) => {
 
         )
     })
+
+
 
 
 

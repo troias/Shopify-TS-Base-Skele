@@ -9,7 +9,7 @@ import { SHOP_QUERY } from '../../lib/graph-queries/queries'
 
 
 const HEADER_MENU_HANDLE = 'main-menu'
-const FOOTER_MENU_HANDLE = 'footer'
+export const FOOTER_MENU_HANDLE = 'footer'
 const SHOP_NAME_FALLBACK = 'Hydrogen'
 const INFO_MENU_HANDLE = 'info'
 
@@ -55,10 +55,21 @@ function FooterWithMenu() {
         handeName: INFO_MENU_HANDLE
     }]
 
+
+
+
+
+
+
+
+    return <Footer menu={footerArr} defaultFooterMenu={ctx.footerMenu} />
+
+
+
     // console.log("returned data", footerArr)
 
 
-    return <Footer menu={footerArr} />
+
 }
 
 function useLayoutQuery() {

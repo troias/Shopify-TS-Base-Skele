@@ -7,12 +7,22 @@ import type { EnhancedMenu } from '~/lib/utils'
 
 
 
+
 /**
  * A server component that specifies the content of the footer on the website
  */
-export function Footer({ menu }: { menu?: EnhancedMenu }) {
+export function Footer({ menu, defaultFooterMenu }: {
+    menu?: [
+        {
+            handeName: string,
+            items: EnhancedMenu
+        }
+    ],
+    defaultFooterMenu?: EnhancedMenu
+}) {
 
     console.log("Footer Footer", menu)
+    console.log("defaultFooterMenu", defaultFooterMenu)
 
     const { pathname } = useUrl()
 
@@ -48,7 +58,7 @@ export function Footer({ menu }: { menu?: EnhancedMenu }) {
 
                 </div>
 
-                <FooterLinks menu={menu} />
+                <FooterLinks menu={menu} defaultFooterMenu={defaultFooterMenu} />
 
 
 
