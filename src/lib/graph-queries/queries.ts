@@ -16,6 +16,7 @@ export const SHOP_QUERY = gql`
     $headerMenuHandle: String!
     $footerMenuHandle: String!
     $infoMenuHandle: String!
+    $supportMenuHandle: String!
   ) @inContext(language: $language) {
     shop {
       name
@@ -40,6 +41,18 @@ export const SHOP_QUERY = gql`
     }
 
     infoMenu: menu(handle: $infoMenuHandle) {
+      id
+      items {
+
+        ...MenuItem
+        items {
+          ...MenuItem
+          title
+        }
+      }
+    }
+
+    supportMenu: menu(handle: $supportMenuHandle) {
       id
       items {
 

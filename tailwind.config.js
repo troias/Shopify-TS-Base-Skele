@@ -10,6 +10,10 @@ module.exports = {
         "menu-grey": "#666666",
         "dm-grey": "#191919",
       },
+      screens: {
+        xxs: "350",
+        xs: "450",
+      },
     },
     plugins: [
       require("@tailwindcss/forms"),

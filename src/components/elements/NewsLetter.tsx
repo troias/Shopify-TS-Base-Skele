@@ -5,9 +5,12 @@ import { InstagramIcon, TickTockIcon, DarkModeSliderButton, Heading } from '~/co
 
 export const NewsLetter = () => {
     return (
-        <div className='grid grid-rows-2 uppercase w-3/5'>
+        <div className='grid grid-rows-2 uppercase w-4/5  xs:w-5/6 sm:w-3/5 md:w-2/5
+        '>
 
-            <Heading size="lead" as="h3" className="uppercase justify-self-center dark:text-white">
+            <Heading size="lead" as="h3" className="uppercase justify-self-center dark:text-white  
+
+            ">
                 Sign up for our ApexAthlete
             </Heading>
             <Heading size="lead" as="h3" width='wide' className="justify-self-center dark:text-white  " >
@@ -18,11 +21,17 @@ export const NewsLetter = () => {
             >
                 <input
                     type="text"
-                    placeholder="Email"
-                    className="border border-gray-300 rounded-md p-2 mb-2 "
+                    placeholder="Your Email Address"
+                    className="border border-gray-300 rounded-md px-4 py-2 mb-2 "
                 />
                 <button
-                    className="bg-secondary-grey text-white p-2 rounded-md  font-bold uppercase  "
+                    className="bg-secondary-grey text-white 
+                   rounded-md 
+                     font-black uppercase dark:bg-gray-300
+                      dark:text-gray-800
+                       text-sm tracking-wide sm 
+                       h-auto
+                       "
                 >
                     Sign up
                 </button>
@@ -41,6 +50,6 @@ export const NewsLetter = () => {
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

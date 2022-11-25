@@ -14,17 +14,19 @@ type RevisedFooterMenun = {
 
 
 export const FooterLinks = ({ menu }: {
-    menu?: RevisedFooterMenun,
+    menu: RevisedFooterMenun | unknown,
     defaultFooterMenu?: EnhancedMenu
 }) => {
 
+    console.log("footerLinksReconstructed", menu)
 
 
+    const footerMenuHandle = "footer"
 
-    const removeDefaultFooterIfCustomFootersExist = (menu) => {
+    const removeDefaultFooterIfCustomFootersExist = (menu: RevisedFooterMenun) => {
 
         if (menu.length > 1) {
-            return menu.filter((item) => item.handeName !== "footer")
+            return menu.filter((item) => item.handeName !== footerMenuHandle)
         }
         return menu
 
@@ -41,8 +43,7 @@ export const FooterLinks = ({ menu }: {
 
     const footerMenu = updatedMenu?.map((item) => {
 
-        // // const { title, url, children } = item             
-        // console.log("FooterLinksmenu", item)
+
 
 
 

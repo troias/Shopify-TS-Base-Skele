@@ -4,14 +4,22 @@ import { useLocalization, useShopQuery, CacheLong } from '@shopify/hydrogen'
 import { Header } from '~/components'
 import { Footer } from '~/components/index.server'
 
-import { parseMenu } from '~/lib/utils'
+import { EnhancedMenu, parseMenu } from '~/lib/utils'
 import { SHOP_QUERY } from '../../lib/graph-queries/queries'
 
 
 const HEADER_MENU_HANDLE = 'main-menu'
-export const FOOTER_MENU_HANDLE = 'footer'
+const FOOTER_MENU_HANDLE = 'footer'
 const SHOP_NAME_FALLBACK = 'Hydrogen'
 const INFO_MENU_HANDLE = 'info'
+const SUPPORT_MENU = "support-menu"
+
+export interface UphancedMenu {
+    handleName: string
+    items: EnhancedMenu
+    id: string
+}
+
 
 export const Layout = ({
     children
@@ -47,22 +55,61 @@ function FooterWithMenu() {
 
     const ctx = useLayoutQuery()
 
+    const placeHolderFooterMenu = [
+        {
+            handleName: "footer",
+            id: "1",
+            items: [
+                {
+                    id: 'gid://shopify/MenuItem/486957416762',
+                    resourceId: null,
+                    tags: [],
+                    title: 'Footer',
+                    type: 'footer',
+                    url: 'https://hydrogen-ts.myshopify.com/search',
+                    items: [
+                        {
+                            id: 'gid://shopify/MenuItem/486957416762',
+                            resourceId: null,
+                            tags: [],
+                            title: 'Footer',
+                            type: 'footer',
+                            url: 'https://hydrogen-ts.myshopify.com/search',
+                        },
+
+                    ],
+                    isExternal: false,
+                    target: '_self',
+                    to: '/search'
+                }
+            ],
+
+        }]
+
+
     const footerArr = [{
+        handeName: FOOTER_MENU_HANDLE,
         ...ctx.footerMenu,
-        handeName: FOOTER_MENU_HANDLE
+
     }, {
         ...ctx.infoMenu,
         handeName: INFO_MENU_HANDLE
-    }]
+    },
+    {
+        ...ctx.supportMenu,
+        handeName: SUPPORT_MENU
+    }
+    ]
+
+    const makeSureFooterArrAlwaysHasOneItem = footerArr.length > 0 ? footerArr : placeHolderFooterMenu
+
+    // console.log("undefinedFooterArr", footerArr)
+
+
+    return <Footer menu={makeSureFooterArrAlwaysHasOneItem} defaultFooterMenu={ctx.footerMenu} />
 
 
 
-
-
-
-
-
-    return <Footer menu={footerArr} defaultFooterMenu={ctx.footerMenu} />
 
 
 
@@ -90,6 +137,7 @@ function useLayoutQuery() {
             headerMenuHandle: HEADER_MENU_HANDLE,
             footerMenuHandle: FOOTER_MENU_HANDLE,
             infoMenuHandle: INFO_MENU_HANDLE,
+            supportMenuHandle: SUPPORT_MENU
         },
         cache: CacheLong(),
         preload: '*',
@@ -116,10 +164,14 @@ function useLayoutQuery() {
         ? parseMenu(data.infoMenu, customPrefixes)
         : undefined
 
+    const supportMenu = data?.infoMenu
+        ? parseMenu(data.infoMenu, customPrefixes)
+        : undefined
 
 
 
-    return { footerMenu, headerMenu, shopName, infoMenu }
+
+    return { footerMenu, headerMenu, shopName, infoMenu, supportMenu }
 }
 
 
