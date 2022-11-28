@@ -11,8 +11,8 @@ module.exports = {
         "dm-grey": "#191919",
       },
       screens: {
-        xxs: "350",
-        xs: "450",
+        xxs: "350px",
+        xs: "450px",
       },
     },
     plugins: [

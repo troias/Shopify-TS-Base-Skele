@@ -11,10 +11,10 @@ import type { UphancedMenu } from '~/components/global/Layout.server'
 /**
  * A server component that specifies the content of the footer on the website
  */
-export function Footer({ menu, defaultFooterMenu }: {
+export function Footer({ menu }: {
     menu: UphancedMenu | unknown
-    ,
-    defaultFooterMenu?: EnhancedMenu
+
+
 }) {
 
     // console.log("Footer Footer", menu)
@@ -34,16 +34,18 @@ export function Footer({ menu, defaultFooterMenu }: {
     // console.log("footer menu", menuInArr)
 
     return (
-        <div className="grid grid-cols-1 grid-rows-2 ">
-            <div className="grid grid-cols-1  ">
+        <div className="grid grid-cols-1  grid-rows-2  ">
+            <div className="grid grid-cols-1 lg:grid-cols-2 ">
                 {/* news letter section */}
-                <div className="grid py-10 sm:px-2  justify-items-center dark:text-white   ">
+                <div className="grid py-10 sm:px-2  justify-items-center dark:text-white order-2   ">
                     {/* 2 line news letter hearding */}
                     <NewsLetter />
                 </div>
-                <FooterLinks menu={menu} defaultFooterMenu={defaultFooterMenu} />
+                <div className="grid grid-cols-1 p-8 justify-items-start gap-y-5  font-semibold xs:px-12 sm:px-32 md:px-44 lg:px-2 order-1  ">
+                    <FooterLinks menu={menu} />
+                </div>
             </div>
-            <div className="grid   place-content-center auto-rows-min h-1/5 gap-y-2 dark:text-white">
+            <div className="grid place-content-center auto-rows-min h-1/5 gap-y-2 dark:text-white lg:order-3">
                 <Heading className=" text-secondary-grey dark:text-white">
                     {new Date().getFullYear()} ApexAthlete LLC | All rights reserved
                 </Heading>

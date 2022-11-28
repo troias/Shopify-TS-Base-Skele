@@ -106,7 +106,7 @@ function FooterWithMenu() {
     // console.log("undefinedFooterArr", footerArr)
 
 
-    return <Footer menu={makeSureFooterArrAlwaysHasOneItem} defaultFooterMenu={ctx.footerMenu} />
+    return <Footer menu={makeSureFooterArrAlwaysHasOneItem} />
 
 
 
