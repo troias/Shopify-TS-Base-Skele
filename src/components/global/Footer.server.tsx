@@ -26,22 +26,16 @@ export function Footer({ menu }: {
     const countryCode = localeMatch ? localeMatch[1] : null
 
     const isHome = pathname === `/${countryCode ? countryCode + '/' : ''}`
-    // const itemsCount = menu
-    //     ? menu?.items?.length + 1 > 4
-    //         ? 4
-    //         : menu?.items?.length + 1
-    //     : []
-    // console.log("footer menu", menuInArr)
+
 
     return (
         <div className="grid grid-cols-1  grid-rows-2  ">
             <div className="grid grid-cols-1 lg:grid-cols-2 ">
                 {/* news letter section */}
-                <div className="grid py-10 sm:px-2  justify-items-center dark:text-white order-2   ">
-                    {/* 2 line news letter hearding */}
+                <div className="grid py-10 sm:px-2  justify-items-center dark:text-white lg:order-2   ">
                     <NewsLetter />
                 </div>
-                <div className="grid grid-cols-1 p-8 justify-items-start gap-y-5  font-semibold xs:px-12 sm:px-32 md:px-44 lg:px-2 order-1  ">
+                <div className="grid grid-cols-1 p-8 justify-items-start gap-y-5 font-semibold xs:px-12 sm:px-32 md:px-44 lg:px-2 order-1 lg:grid-cols-2">
                     <FooterLinks menu={menu} />
                 </div>
             </div>

@@ -51,14 +51,14 @@ export const FooterLinks = ({ menu }: {
         return (
 
 
-            <div className="grid border-2 lg:border-none border-gray-400  rounded-xl  px-8 py-10 gap-y-2  text-secondary-grey font-semibold dark:text-gray-200 w-full     ">
+            <div className="grid 
+            border-2 lg:border-none border-gray-400  rounded-xl px-8 py-10 gap-y-2  text-secondary-grey font-semibold dark:text-gray-200 
+             md:w-4/5 md:justify-self-center lg:w-fit    ">
 
                 <Heading size="lead" as="h3" className="uppercase font-black text-black dark:text-white ">
                     {item?.handeName}
                 </Heading>
                 {item.items.map((item) => {
-
-
                     return (
                         <div className="">
                             {item?.title}
