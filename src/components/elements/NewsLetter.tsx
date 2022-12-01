@@ -16,7 +16,7 @@ export const NewsLetter = () => {
                     Newsletter
                 </Heading>
             </div>
-            <div className=" grid grid-rows-2  py-4 lg:grid-rows-1 lg:grid-cols-2 lg:gap-x-2 h-baseline  ">
+            <div className=" grid grid-rows-2   lg:grid-rows-1 lg:grid-cols-2 lg:gap-x-2 h-4/5 lg:mt-2  ">
 
 
 
@@ -24,7 +24,7 @@ export const NewsLetter = () => {
                 <input
                     type="text"
                     placeholder="Your Email Address"
-                    className="border border-gray-300 rounded-md h-1/2 py-2 px-2"
+                    className="border border-gray-300 rounded-md  px-2 h-full"
                 />
                 <button
                     className="bg-secondary-grey text-white 
@@ -33,9 +33,10 @@ export const NewsLetter = () => {
                       dark:text-gray-800
                        text-sm tracking-wide sm 
                       
-                       py-2
+                     
                        px-4
-                       h-1/2
+                       h-full
+                       
                        "
                 >
                     Sign up
