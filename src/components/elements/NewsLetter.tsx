@@ -5,8 +5,9 @@ import { InstagramIcon, TickTockIcon, DarkModeSliderButton, Heading } from '~/co
 
 export const NewsLetter = () => {
     return (
-        <div className='grid grid-rows-2 uppercase w-4/5   sm:w-3/5 md:w-2/5  lg:w-2/3 lg:h-2/3   '>
-            <div className="grid lg:place-items-end gap-0 h-fit lg:self-center">
+        <div className='grid grid-rows-2 
+        uppercase w-4/5   sm:w-3/5 md:w-2/5  lg:w-2/3 lg:h-2/3 xl:w-4/5 2xl:w-3/5 lg:justify-self-end mx-2 px-2  '>
+            <div className="grid lg:place-items-end gap-0 h-fit ">
 
 
                 <Heading size="lead" as="h3" className="uppercase justify-self-center dark:text-white lg:justify-self-end">
@@ -24,7 +25,7 @@ export const NewsLetter = () => {
                 <input
                     type="text"
                     placeholder="Your Email Address"
-                    className="border border-gray-300 rounded-md  px-2 h-full"
+                    className="border border-gray-300 rounded-md  px-2 lg:px-4 h-full px"
                 />
                 <button
                     className="bg-secondary-grey text-white 
@@ -36,6 +37,9 @@ export const NewsLetter = () => {
                      
                        px-4
                        h-full
+                       mt-2
+                       lg:mt-0
+                       py-2
                        
                        "
                 >
