@@ -12,7 +12,11 @@ import {
 } from "~/components"
 
 import type { EnhancedMenu } from "~/lib/utils"
+
+import { CartDrawer } from './CartDrawer.client'
+import { MenuDrawer } from './MenuDrawer.client'
 import { useDrawer } from "./Drawer.client"
+
 
 export const Header = ({
     title = "",
@@ -30,6 +34,8 @@ export const Header = ({
     // console.log("isHome", isHome)
     // console.log("pathName", pathname)
 
+    // console.log("menu", menu)
+
     const {
         isOpen: isCartOpen,
         openDrawer: openCart,
@@ -44,6 +50,8 @@ export const Header = ({
 
     return (
         <>
+            <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
+            <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu!} />
             <MobileHeader
                 countryCode={countryCode}
                 isHome={isHome}

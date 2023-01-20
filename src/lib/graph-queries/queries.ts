@@ -99,7 +99,11 @@ export const HOMEPAGE_CONTENT_QUERY = gql`
           reference {
             ...Media
           }
+       
         }
+        buttonTitle: metafield(namespace: "hero", key: "buttonTitle") {
+            value
+          }
       }
     }
     featuredCollections: collections(

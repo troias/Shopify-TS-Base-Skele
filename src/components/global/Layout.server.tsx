@@ -45,7 +45,7 @@ export const Layout = ({
 function HeaderWithMenu() {
     const { shopName, headerMenu } = useLayoutQuery()
 
-    // console.log("headerMenu", headerMenu, "shopName", shopName)
+    console.log("headerMenu", headerMenu, "shopName", shopName)
 
     return <Header title={shopName} menu={headerMenu} />
 }

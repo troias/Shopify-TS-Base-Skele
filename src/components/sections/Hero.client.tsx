@@ -12,6 +12,7 @@ interface Metafield {
 
 export function Hero({
   byline,
+  buttonTitle,
   cta,
   handle,
   heading,
@@ -30,12 +31,13 @@ export function Hero({
   spread: Metafield
   spreadSecondary: Metafield
   top?: boolean
+  buttonTitle: Metafield
 }) {
 
 
   // console.log("hero", "-", "inline", byline, cta, handle, heading, height, loading, spread, spreadSecondary, top)
   const { width } = useWindowSize()
-  console.log("width", width)
+  console.log("buttonTitle", buttonTitle)
 
   return (
     <Link to={`/collections/${handle}`}>
@@ -98,14 +100,10 @@ export function Hero({
           }
           <Link to={`/collections/${handle}`} className="mb-2">
             <Text className="text-lg font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
-              Shop Womens <br />
+              {buttonTitle.value} <br />
             </Text>
           </Link>
-          <Link to={`/collections/${handle}`}>
-            <Text className="text-lg font-bold text-white   bg-gray-400 rounded-3xl px-4 py-2 uppercase ">
-              Shop Mens <br />
-            </Text>
-          </Link>
+
 
 
 
