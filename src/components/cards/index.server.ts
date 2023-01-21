@@ -1,2 +1,1 @@
-export const lintFiller = () => {
-}
+export { CollectionCard } from './CollectionCard.server'

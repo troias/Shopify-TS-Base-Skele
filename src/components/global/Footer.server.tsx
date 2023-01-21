@@ -1,78 +1,46 @@
-import { useEffect, useState } from 'react'
-
 import { useUrl } from '@shopify/hydrogen'
 
-import { Section, Heading, FooterMenu, CountrySelector, NewsLetter, FooterLinks } from '~/components'
+import { Section, Heading, FooterMenu, CountrySelector } from '~/components'
 import type { EnhancedMenu } from '~/lib/utils'
-import type { UphancedMenu } from '~/components/global/Layout.server'
-
-
 
 /**
  * A server component that specifies the content of the footer on the website
  */
-export function Footer({ menu }: {
-    menu: UphancedMenu | unknown
-
-
-}) {
-
-    // console.log("Footer Footer", menu)
-    // console.log("defaultFooterMenu", defaultFooterMenu)
-
+export function Footer({ menu }: { menu?: EnhancedMenu }) {
     const { pathname } = useUrl()
 
     const localeMatch = /^\/([a-z]{2})(\/|$)/i.exec(pathname)
     const countryCode = localeMatch ? localeMatch[1] : null
 
     const isHome = pathname === `/${countryCode ? countryCode + '/' : ''}`
-
+    const itemsCount = menu
+        ? menu?.items?.length + 1 > 4
+            ? 4
+            : menu?.items?.length + 1
+        : []
 
     return (
-        <div className="grid grid-cols-1  grid-rows-2 lg:py-12 ">
-            <div className="grid grid-cols-1 lg:grid-cols-3 ">
-                {/* news letter section */}
-                <div className="grid py-10 sm:px-2  justify-items-center dark:text-white lg:order-2 lg:col-span-2  ">
-                    <NewsLetter />
-                </div>
-                <div className="grid grid-cols-1 p-8 justify-items-start gap-y-5 font-semibold xs:px-12 sm:px-32 md:px-44 lg:px-2 order-1 lg:grid-cols-2">
-                    <FooterLinks menu={menu} />
-                </div>
+        <Section
+            divider={isHome ? 'none' : 'top'}
+            as="footer"
+            role="contentinfo"
+            className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 
+        border-b md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
+        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`}
+        >
+            <FooterMenu menu={menu} />
+            <section className="grid gap-4 w-full md:max-w-[335px] md:ml-auto">
+                <Heading size="lead" className="cursor-default" as="h3">
+                    Country
+                </Heading>
+                <CountrySelector />
+            </section>
+            <div
+                className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
+            >
+                &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
+                Licensed Open Source project. This website is carbon&nbsp;neutral.
             </div>
-            <div className="grid place-content-center auto-rows-min h-1/5 gap-y-2 dark:text-white lg:order-3 ">
-                <Heading className=" text-secondary-grey dark:text-white">
-                    {new Date().getFullYear()} ApexAthlete LLC | All rights reserved
-                </Heading>
-                <Heading className="grid place-content-center text-sm">
-                    Learn More | Dream More | Achieve More
-                </Heading>
-                <Heading className="place-self-center dark:text-gray-400">
-                    Privacy Policy | Terms of Service | CCPA
-                </Heading>
-
-
-            </div>
-
-        </div>
-
+        </Section>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

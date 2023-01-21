@@ -1,2 +1,2 @@
-
-export { Hero } from './Hero.client'
+export { FeaturedCollections } from './FeaturedCollections'
+export { Hero } from './Hero'

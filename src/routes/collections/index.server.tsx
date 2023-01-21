@@ -9,24 +9,21 @@ import {
 } from '@shopify/hydrogen'
 import type { Collection } from '@shopify/hydrogen/storefront-api-types'
 
-// import {PageHeader, Section, Grid} from '~/components';
-// import {Layout, CollectionCard} from '~/components/index.server';
-// import {getImageLoadingPriority, PAGINATION_SIZE} from '~/lib/const';
+import { PageHeader, Section, Grid } from '~/components'
+import { Layout, CollectionCard } from '~/components/index.server'
+import { getImageLoadingPriority, PAGINATION_SIZE } from '~/lib/const'
 
 export default function Collections() {
   return (
-    // <Layout>
-    //   <Seo type="page" data={{ title: 'All Collections' }} />
-    //   <PageHeader heading="Collections" />
-    //   <Section>
-    //     <Suspense>
-    //       <CollectionGrid />
-    //     </Suspense>
-    //   </Section>
-    // </Layout>
-    <>
-      collections
-    </>
+    <Layout>
+      <Seo type="page" data={{ title: 'All Collections' }} />
+      <PageHeader heading="Collections" />
+      <Section>
+        <Suspense>
+          <CollectionGrid />
+        </Suspense>
+      </Section>
+    </Layout>
   )
 }
 
@@ -56,17 +53,15 @@ function CollectionGrid() {
   const collections: Collection[] = data.collections.nodes
 
   return (
-    // <Grid items={collections.length === 3 ? 3 : 2}>
-    //   {collections.map((collection, i) => (
-    //     <CollectionCard
-    //       collection={collection}
-    //       key={collection.id}
-    //       loading={getImageLoadingPriority(i, 2)}
-    //     />
-    //   ))}
-    // </Grid>
-    <>
-    </>
+    <Grid items={collections.length === 3 ? 3 : 2}>
+      {collections.map((collection, i) => (
+        <CollectionCard
+          collection={collection}
+          key={collection.id}
+          loading={getImageLoadingPriority(i, 2)}
+        />
+      ))}
+    </Grid>
   )
 }
 

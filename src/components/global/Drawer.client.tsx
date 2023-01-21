@@ -48,8 +48,8 @@ function Drawer({
         <div className="fixed inset-0">
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className={`fixed inset-y-0 flex max-w-full ${openFrom === 'right' ? 'right-0' : ''
-                }`}
+              className={`fixed inset-y-0 flex max-w-full bg-white ${openFrom === 'right' ? 'right-0' : ''
+                }  pt-6`}
             >
               <Transition.Child
                 as={Fragment}

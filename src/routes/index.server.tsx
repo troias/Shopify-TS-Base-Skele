@@ -1,4 +1,4 @@
-// import { Suspense } from 'react'
+import { Suspense } from 'react'
 import {
   CacheLong,
   gql,
@@ -9,30 +9,36 @@ import {
   useShopQuery,
 } from '@shopify/hydrogen'
 
-// import { MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT } from '~/lib/fragments'
-// import { getHeroPlaceholder } from '~/lib/placeholders'
-import { Hero } from '~/components'
-import { Layout } from '../components/global/index.server'
+import { MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT } from '~/lib/fragments'
+import { getHeroPlaceholder } from '~/lib/placeholders'
+import { FeaturedCollections, Hero } from '~/components'
+import { Layout, ProductSwimlane } from '~/components/index.server'
 import {
   CollectionConnection,
   ProductConnection,
 } from '@shopify/hydrogen/storefront-api-types'
 
+export default function Homepage() {
+  useServerAnalytics({
+    shopify: {
+      canonicalPath: '/',
+      pageType: ShopifyAnalyticsConstants.pageType.home,
+    },
+  })
 
-import { getHeroPlaceholder } from '~/lib/placeholders'
-
-import { HOMEPAGE_CONTENT_QUERY } from '../lib/graph-queries/queries'
-
-
-
-interface Metafield {
-  value: string
-  reference?: object
+  return (
+    <Layout>
+      <Suspense>
+        <SeoForHomepage />
+      </Suspense>
+      <Suspense>
+        <HomepageContent />
+      </Suspense>
+    </Layout>
+  )
 }
 
-
-const HomePageContent = () => {
-
+function HomepageContent() {
   const {
     language: { isoCode: languageCode },
     country: { isoCode: countryCode },
@@ -53,41 +59,134 @@ const HomePageContent = () => {
 
   const { heroBanners, featuredCollections, featuredProducts } = data
 
-
-
-  interface PrimaryHeroBanner {
-    byline: Metafield,
-    cta: Metafield,
-    handle: string,
-    heading: Metafield,
-    height?: 'full'
-    loading?: 'eager' | 'lazy'
-    spread: Metafield,
-    spreadSecondary: Metafield,
-    top: number,
-    id: string,
-    descriptionHtml: string,
-
-  }
-  //, secondaryHero, tertiaryHero
-
-  const [primaryHero] = getHeroPlaceholder(
+  // fill in the hero banners with placeholders if they're missing
+  const [primaryHero, secondaryHero, tertiaryHero] = getHeroPlaceholder(
     heroBanners.nodes,
-  ) as PrimaryHeroBanner[]
-
-  // console.log("herodata", data.heroBanners.nodes)
+  )
 
   return (
-    <div>
-      <Layout>
-
-
-        {primaryHero && (
-          <Hero {...primaryHero} top loading="eager" />
-        )}
-      </Layout>
-    </div>
+    <>
+      {primaryHero && (
+        <Hero {...primaryHero} height="full" top loading="eager" />
+      )}
+      <ProductSwimlane
+        data={featuredProducts.nodes}
+        title="Featured Products"
+        divider="bottom"
+      />
+      {secondaryHero && <Hero {...secondaryHero} />}
+      <FeaturedCollections
+        data={featuredCollections.nodes}
+        title="Collections"
+      />
+      {tertiaryHero && <Hero {...tertiaryHero} />}
+    </>
   )
 }
 
-export default HomePageContent
+function SeoForHomepage() {
+  const {
+    data: {
+      shop: { name, description },
+    },
+  } = useShopQuery({
+    query: HOMEPAGE_SEO_QUERY,
+    cache: CacheLong(),
+    preload: true,
+  })
+
+  return (
+    <Seo
+      type="homepage"
+      data={{
+        title: name,
+        description,
+        titleTemplate: '%s · Powered by Hydrogen',
+      }}
+    />
+  )
+}
+
+/**
+ * The homepage content query includes a request for custom metafields inside the alias
+ * `heroBanners`. The template loads placeholder content if these metafields don't
+ * exist. Define the following five custom metafields on your Shopify store to override placeholders:
+ * - hero.title             Single line text
+ * - hero.byline            Single line text
+ * - hero.cta               Single line text
+ * - hero.spread            File
+ * - hero.spread_secondary  File
+ *
+ * @see https://help.shopify.com/manual/metafields/metafield-definitions/creating-custom-metafield-definitions
+ * @see https://github.com/Shopify/hydrogen/discussions/1790
+ */
+
+const HOMEPAGE_CONTENT_QUERY = gql`
+  ${MEDIA_FRAGMENT}
+  ${PRODUCT_CARD_FRAGMENT}
+  query homepage($country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    heroBanners: collections(
+      first: 3
+      query: "collection_type:custom"
+      sortKey: UPDATED_AT
+    ) {
+      nodes {
+        id
+        handle
+        title
+        descriptionHtml
+        heading: metafield(namespace: "hero", key: "title") {
+          value
+        }
+        byline: metafield(namespace: "hero", key: "byline") {
+          value
+        }
+        cta: metafield(namespace: "hero", key: "cta") {
+          value
+        }
+        spread: metafield(namespace: "hero", key: "spread") {
+          reference {
+            ...Media
+          }
+        }
+        spreadSecondary: metafield(namespace: "hero", key: "spread_secondary") {
+          reference {
+            ...Media
+          }
+        }
+      }
+    }
+    featuredCollections: collections(
+      first: 3
+      query: "collection_type:smart"
+      sortKey: UPDATED_AT
+    ) {
+      nodes {
+        id
+        title
+        handle
+        image {
+          altText
+          width
+          height
+          url
+        }
+      }
+    }
+    featuredProducts: products(first: 12) {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+`
+
+const HOMEPAGE_SEO_QUERY = gql`
+  query shopInfo {
+    shop {
+      name
+      description
+    }
+  }
+`
