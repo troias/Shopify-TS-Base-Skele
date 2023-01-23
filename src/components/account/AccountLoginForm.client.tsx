@@ -49,6 +49,8 @@ export function AccountLoginForm({ shopName }: { shopName: string }) {
                 password,
             })
 
+
+
             if (response.error) {
                 setHasSubmitError(true)
                 resetForm()
@@ -125,9 +127,11 @@ export async function callLoginApi({
             },
             body: JSON.stringify({ email, password }),
         })
+        // console.log("response", await res.json())
         if (res.ok) {
             return {}
         } else {
+            // console.log("response", res)
             return res.json()
         }
     } catch (error: any) {

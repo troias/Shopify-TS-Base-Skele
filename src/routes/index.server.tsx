@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect, startTransition } from 'react'
 import {
   CacheLong,
   gql,
@@ -31,7 +31,13 @@ export default function Homepage() {
       <Suspense>
         <SeoForHomepage />
       </Suspense>
-      <Suspense>
+      <Suspense fallback={
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        </div>
+
+      }
+      >
         <HomepageContent />
       </Suspense>
     </Layout>
@@ -57,12 +63,20 @@ function HomepageContent() {
     preload: true,
   })
 
+
+
+
+
   const { heroBanners, featuredCollections, featuredProducts } = data
 
   // fill in the hero banners with placeholders if they're missing
   const [primaryHero, secondaryHero, tertiaryHero] = getHeroPlaceholder(
     heroBanners.nodes,
   )
+
+  //Make sure data is loaded in useEffect?  
+
+
 
   return (
     <>

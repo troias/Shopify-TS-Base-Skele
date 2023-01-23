@@ -5,6 +5,7 @@ import {
     CacheNone,
     Seo,
     gql,
+    useSession,
     type HydrogenRouteProps,
     HydrogenRequest,
     HydrogenApiRouteOptions,
@@ -12,6 +13,7 @@ import {
 
 import { AccountLoginForm } from '~/components'
 import { Layout } from '~/components/index.server'
+
 
 export default function Login({ response }: HydrogenRouteProps) {
     response.cache(CacheNone())
@@ -25,6 +27,9 @@ export default function Login({ response }: HydrogenRouteProps) {
         cache: CacheLong(),
         preload: '*',
     })
+
+    const { customerAccessToken } = useSession()
+    console.log("customerAccessToken", customerAccessToken)
 
     return (
         <Layout>
@@ -54,6 +59,8 @@ export async function api(
 
     const jsonBody = await request.json()
 
+    console.log("jsonBody", jsonBody)
+
     if (!jsonBody.email || !jsonBody.password) {
         return new Response(
             JSON.stringify({ error: 'Incorrect email or password.' }),
@@ -74,14 +81,20 @@ export async function api(
     })
 
     if (data?.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
+        // console.log("customerAccessToken", data.customerAccessTokenCreate.customerAccessToken.accessToken),
         await session.set(
             'customerAccessToken',
             data.customerAccessTokenCreate.customerAccessToken.accessToken,
         )
 
+
+
         return new Response(null, {
             status: 200,
         })
+
+
+
     } else {
         return new Response(
             JSON.stringify({
